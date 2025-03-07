@@ -18,6 +18,7 @@ export function Header({
 }: HeaderProps) {
   const [viewMode, setViewMode] = useState<'day' |'week' | 'month' | 'year'>('week');
   const [currentDate, setCurrentDate] = useState(new Date());
+
   const dateString = useMemo(() => {
     return format(currentDate, 'yyyy年MM月', { locale: ja });
   }, [currentDate])
@@ -52,7 +53,7 @@ export function Header({
       justify={"space-between"}
     >
       <Flex align={"center"} gap={3}>
-        <IconButton fontSize={"2xl"} onClick={alert} variant={"subtle"} colorPalette={"gray"} rounded={"full"}>
+        <IconButton fontSize={"2xl"} variant={"subtle"} colorPalette={"gray"} rounded={"full"} onClick={onSidebarToggle}>
           <RxHamburgerMenu />
         </IconButton>
         <Text fontSize={"2xl"} fontWeight={"semibold"}>
