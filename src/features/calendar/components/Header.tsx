@@ -4,34 +4,26 @@ import { ja } from "date-fns/locale";
 import { useMemo, useState } from "react";
 import { FiChevronLeft, FiChevronRight, FiSettings } from "react-icons/fi";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useNavigate } from "react-router";
 import { ViewModeMenu } from "./ViewModeMenu";
 
 interface HeaderProps {
   onSidebarToggle: () => void;
-  currentDate: Date;
-  setCurrentDate: (date: Date) => void;
-  viewMode: 'day' |'week' | 'month' | 'year';
-  onViewModeChange: (mode: 'week' | 'month') => void;
   userName: string;
 }
 
 
 export function Header({
   onSidebarToggle,
-  currentDate,
-  setCurrentDate,
-  viewMode,
-  onViewModeChange,
   userName
 }: HeaderProps) {
+  const [viewMode, setViewMode] = useState<'day' |'week' | 'month' | 'year'>('week');
+  const [currentDate, setCurrentDate] = useState(new Date());
   const dateString = useMemo(() => {
     return format(currentDate, 'yyyy年MM月', { locale: ja });
   }, [currentDate])
-  const [newViewMode, setNewViewMode] = useState(viewMode);
 
-  function handleClickToday(event: React.MouseEvent<HTMLButtonElement>): void {
-    throw new Error("Function not implemented.");
+  function handleClickToday(): void {
+    setCurrentDate(new Date());
   }
 
   function handlePrevClick(event: React.MouseEvent<HTMLButtonElement>): void {
@@ -43,8 +35,9 @@ export function Header({
   }
 
   const handleViewMode = (value: 'day' |'week' | 'month' | 'year') => {
-    setNewViewMode(value);
+    setViewMode(value);
   }
+  console.log(currentDate);
 
   return (
     <Flex
@@ -80,7 +73,7 @@ export function Header({
         <IconButton variant={"subtle"} fontSize={"2xl"} rounded={"full"}>
           <FiSettings />
         </IconButton>
-        <ViewModeMenu viewMode={newViewMode} handleViewMode={handleViewMode}/>
+        <ViewModeMenu viewMode={viewMode} handleViewMode={handleViewMode}/>
         <Text fontSize={"xl"} fontWeight={"semibold"}>{userName}</Text>
       </Flex>
     </Flex>

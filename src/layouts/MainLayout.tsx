@@ -8,13 +8,12 @@ import { Header } from "@/features/calendar/components/Header";
 export function MainLayout() {
   return (
     <Flex direction={"column"} height={"100vh"}>
-      <Header userName="TestUser" onSidebarToggle={function (): void {
-        throw new Error("Function not implemented.");
-      }} currentDate={new Date()} setCurrentDate={function (date: Date): void {
-        throw new Error("Function not implemented.");
-      }} viewMode={"week"} onViewModeChange={function (mode: "week" | "month"): void {
-        throw new Error("Function not implemented.");
-      }} />
+      <Header
+        userName="TestUser"
+        onSidebarToggle={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
 
       {/* コンテンツ領域 */}
       <Flex mt="60px" height={"calc(100vh - 60px)"} bg={"gray.100"}>

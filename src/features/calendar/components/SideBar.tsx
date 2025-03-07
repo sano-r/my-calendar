@@ -1,14 +1,9 @@
-﻿import { Text, Avatar, Box, Flex } from "@chakra-ui/react";
-import { RiDashboardFill, RiSettings3Fill, RiTaskFill } from "react-icons/ri";
-import { Link, useNavigate } from "react-router";
+﻿import { Box, Flex } from "@chakra-ui/react";
 import { PrimaryButton } from "../../../components/PrimaryButton";
 
 export function SideBar() {
-  const navigate = useNavigate();
 
-  const onClickLogout = () => {
-    navigate("/");
-  };
+  
 
   return (
     <Box w="80" bg="gray.100" h={"100%"}>
