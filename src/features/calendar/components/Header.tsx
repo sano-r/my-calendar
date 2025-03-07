@@ -2,15 +2,10 @@
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useMemo, useState } from "react";
-import { FiChevronDown, FiChevronLeft, FiChevronRight, FiSettings } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiSettings } from "react-icons/fi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavigate } from "react-router";
-import {
-  MenuContent,
-  MenuItem,
-  MenuRoot,
-  MenuTrigger,
-} from "@/components/ui/menu"
+import { ViewModeMenu } from "./ViewModeMenu";
 
 interface HeaderProps {
   onSidebarToggle: () => void;
@@ -34,7 +29,6 @@ export function Header({
     return format(currentDate, 'yyyy年MM月', { locale: ja });
   }, [currentDate])
   const [newViewMode, setNewViewMode] = useState(viewMode);
-  const navigate = useNavigate();
 
   function handleClickToday(event: React.MouseEvent<HTMLButtonElement>): void {
     throw new Error("Function not implemented.");
@@ -86,27 +80,7 @@ export function Header({
         <IconButton variant={"subtle"} fontSize={"2xl"} rounded={"full"}>
           <FiSettings />
         </IconButton>
-        <MenuRoot onSelect={e => handleViewMode(e.value as 'day' |'week' | 'month' | 'year')}>
-          <MenuTrigger asChild>
-            <Button rounded={"full"} size={"lg"} variant={"surface"}>
-              {newViewMode === 'day' ? '日' : newViewMode === 'week' ? '週' : newViewMode === 'month' ? '月' : '年'} <FiChevronDown />
-            </Button>
-          </MenuTrigger>
-          <MenuContent>
-            <MenuItem value="day">
-              日
-            </MenuItem>
-            <MenuItem value="week">
-              週
-            </MenuItem>
-            <MenuItem value="month">
-              月
-            </MenuItem>
-            <MenuItem value="year">
-              年
-            </MenuItem>
-          </MenuContent>
-        </MenuRoot>
+        <ViewModeMenu viewMode={newViewMode} handleViewMode={handleViewMode}/>
         <Text fontSize={"xl"} fontWeight={"semibold"}>{userName}</Text>
       </Flex>
     </Flex>
