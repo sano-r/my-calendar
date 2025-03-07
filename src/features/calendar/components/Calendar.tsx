@@ -37,7 +37,7 @@ export function Calendar() {
   };
 
   return (
-    <Box>
+    <Box backgroundColor={"white"} h={"100%"} rounded={"lg"} shadow={"lg"}>
       <Box display="flex" justifyContent="space-between" mb={4}>
         <Text fontSize="xl" fontWeight="bold">
           {format(currentMonth, "yyyy年MM月", { locale: ja })}
