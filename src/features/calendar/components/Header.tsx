@@ -10,13 +10,15 @@ interface HeaderProps {
   onSidebarToggle: () => void;
   userName: string;
   initView: "day" | "week" | "month" | "year";
+  onChangeViewMode: (mode: "day" | "week" | "month" | "year") => void;
 }
 
-export function Header({ onSidebarToggle, userName, initView }: HeaderProps) {
-  const [viewMode, setViewMode] = useState<"day" | "week" | "month" | "year">(
-    initView
-  );
-
+export function Header({
+  onSidebarToggle,
+  userName,
+  initView,
+  onChangeViewMode,
+}: HeaderProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const dateString = useMemo(() => {
@@ -35,9 +37,6 @@ export function Header({ onSidebarToggle, userName, initView }: HeaderProps) {
     throw new Error("Function not implemented.");
   }
 
-  const handleViewMode = (value: "day" | "week" | "month" | "year") => {
-    setViewMode(value);
-  };
   console.log(currentDate);
 
   return (
@@ -100,7 +99,7 @@ export function Header({ onSidebarToggle, userName, initView }: HeaderProps) {
         <IconButton variant={"subtle"} fontSize={"2xl"} rounded={"full"}>
           <FiSettings />
         </IconButton>
-        <ViewModeMenu viewMode={viewMode} handleViewMode={handleViewMode} />
+        <ViewModeMenu viewMode={initView} handleViewMode={onChangeViewMode} />
         <Text fontSize={"xl"} fontWeight={"semibold"}>
           {userName}
         </Text>

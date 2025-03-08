@@ -29,13 +29,7 @@ export function WeekView({ date, events }: WeekViewProps) {
   ); // 週の各日の配列
 
   return (
-    <Box
-      backgroundColor={"white"}
-      h={"100%"}
-      rounded={"lg"}
-      shadow={"lg"}
-      overflow={"auto"}
-    >
+    <Box>
       <Box>
         <Grid templateColumns="repeat(8, 1fr)" gap={0} border="1px solid #ddd">
           {/* 時間軸の表示 */}
