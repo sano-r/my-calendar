@@ -9,19 +9,19 @@ import { ViewModeMenu } from "./ViewModeMenu";
 interface HeaderProps {
   onSidebarToggle: () => void;
   userName: string;
+  initView: "day" | "week" | "month" | "year";
 }
 
+export function Header({ onSidebarToggle, userName, initView }: HeaderProps) {
+  const [viewMode, setViewMode] = useState<"day" | "week" | "month" | "year">(
+    initView
+  );
 
-export function Header({
-  onSidebarToggle,
-  userName
-}: HeaderProps) {
-  const [viewMode, setViewMode] = useState<'day' |'week' | 'month' | 'year'>('week');
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const dateString = useMemo(() => {
-    return format(currentDate, 'yyyy年MM月', { locale: ja });
-  }, [currentDate])
+    return format(currentDate, "yyyy年MM月", { locale: ja });
+  }, [currentDate]);
 
   function handleClickToday(): void {
     setCurrentDate(new Date());
@@ -35,9 +35,9 @@ export function Header({
     throw new Error("Function not implemented.");
   }
 
-  const handleViewMode = (value: 'day' |'week' | 'month' | 'year') => {
+  const handleViewMode = (value: "day" | "week" | "month" | "year") => {
     setViewMode(value);
-  }
+  };
   console.log(currentDate);
 
   return (
@@ -53,29 +53,57 @@ export function Header({
       justify={"space-between"}
     >
       <Flex align={"center"} gap={3}>
-        <IconButton fontSize={"2xl"} variant={"subtle"} colorPalette={"gray"} rounded={"full"} onClick={onSidebarToggle}>
+        <IconButton
+          fontSize={"2xl"}
+          variant={"subtle"}
+          colorPalette={"gray"}
+          rounded={"full"}
+          onClick={onSidebarToggle}
+        >
           <RxHamburgerMenu />
         </IconButton>
         <Text fontSize={"2xl"} fontWeight={"semibold"}>
           my-calendar
         </Text>
-        <Button rounded={"full"} size={"lg"} variant={"surface"} onClick={handleClickToday}>今日</Button>
-        <IconButton aria-label="前へ" variant={"subtle"} fontSize={"2xl"} rounded={"full"} onClick={handlePrevClick}>
+        <Button
+          rounded={"full"}
+          size={"lg"}
+          variant={"surface"}
+          onClick={handleClickToday}
+        >
+          今日
+        </Button>
+        <IconButton
+          aria-label="前へ"
+          variant={"subtle"}
+          fontSize={"2xl"}
+          rounded={"full"}
+          onClick={handlePrevClick}
+        >
           <FiChevronLeft />
         </IconButton>
-        <IconButton aria-label="次へ" variant={"subtle"} fontSize={"2xl"} rounded={"full"} onClick={handleNextClick}>
+        <IconButton
+          aria-label="次へ"
+          variant={"subtle"}
+          fontSize={"2xl"}
+          rounded={"full"}
+          onClick={handleNextClick}
+        >
           <FiChevronRight />
         </IconButton>
-        <Text fontSize={"2xl"} fontWeight={"normal"}>{dateString}</Text>
+        <Text fontSize={"2xl"} fontWeight={"normal"}>
+          {dateString}
+        </Text>
       </Flex>
-
 
       <Flex align={"center"} gap={3}>
         <IconButton variant={"subtle"} fontSize={"2xl"} rounded={"full"}>
           <FiSettings />
         </IconButton>
-        <ViewModeMenu viewMode={viewMode} handleViewMode={handleViewMode}/>
-        <Text fontSize={"xl"} fontWeight={"semibold"}>{userName}</Text>
+        <ViewModeMenu viewMode={viewMode} handleViewMode={handleViewMode} />
+        <Text fontSize={"xl"} fontWeight={"semibold"}>
+          {userName}
+        </Text>
       </Flex>
     </Flex>
   );
