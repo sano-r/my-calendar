@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import { Toaster } from "./components/ui/toaster";
-import { MainLayout } from "./layouts/MainLayout";
+import { Calendar } from "./features/calendar/Calendar";
 import { MonthView } from "./features/calendar/components/MonthView";
 import { WeekView } from "./features/calendar/components/WeekView";
 import { DayView } from "./features/calendar/components/DayView";
@@ -32,7 +32,7 @@ export function App() {
     <>
       <Toaster />
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<Calendar />}>
           <Route
             index
             element={<WeekView date={new Date()} events={events} />}

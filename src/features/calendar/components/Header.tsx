@@ -50,6 +50,7 @@ export function Header({
       color="black" // 文字色
       position="fixed"
       justify={"space-between"}
+      zIndex={"100"}
     >
       <Flex align={"center"} gap={3}>
         <IconButton
