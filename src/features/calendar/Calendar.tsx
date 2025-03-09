@@ -6,9 +6,9 @@ import { useState } from "react";
 
 export function Calendar() {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
-  const [viewMode, setViewMode] = useState<"week" | "day" | "month" | "year">(
-    "week"
-  );
+  const [viewMode, setViewMode] = useState<"week" | "day" | "month" | "year">("week");
+  const [currentMonth, setCurrentMonth] = useState();
+  
   const handleSidebarOpen = () => {
     setIsSideBarOpen(!isSideBarOpen);
   };

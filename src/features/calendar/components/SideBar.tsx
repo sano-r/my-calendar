@@ -19,7 +19,7 @@ export function SideBar({ isOpen }: Props) {
       //   animation: "slide-from-right 300ms",
       // }}
     >
-      <Box maxW={"100%"} m={8} direction="column" gap={4} borderWidth={1} borderColor={"black"}>
+      <Box maxW={"100%"} m={8} direction="column" gap={4} >
         <Flex direction={"column"} gap={4}>
           <PrimaryButton alignSelf={"flex-start"}>作成</PrimaryButton>
           <Box w={"100%"} h={"200px"} borderWidth={3} borderColor={"red.600"}>

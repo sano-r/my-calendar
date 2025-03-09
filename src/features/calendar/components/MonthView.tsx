@@ -11,12 +11,15 @@ import {
 } from "date-fns";
 import { ja } from "date-fns/locale";
 import { useState } from "react";
+import { useCalendarContext } from "../CalendarContext.tsx";
 
 export function MonthView() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const {state} = useCalendarContext();
+  state.currentDate
 
-  const startOfMonthDate = startOfMonth(currentMonth);
-  const endOfMonthDate = endOfMonth(currentMonth);
+  const startOfMonthDate = startOfMonth(state.currentDate);
+  const endOfMonthDate = endOfMonth(state.currentDate);
   const startOfWeekDate = startOfWeek(startOfMonthDate);
   const endOfWeekDate = endOfWeek(endOfMonthDate);
 

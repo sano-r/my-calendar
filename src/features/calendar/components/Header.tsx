@@ -1,10 +1,11 @@
 ﻿import { Button, Flex, IconButton, Text } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { FiChevronLeft, FiChevronRight, FiSettings } from "react-icons/fi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { ViewModeMenu } from "./ViewModeMenu";
+import { useCalendarContext } from "../CalendarContext.tsx";
 
 interface HeaderProps {
   onSidebarToggle: () => void;
@@ -19,25 +20,18 @@ export function Header({
   initView,
   onChangeViewMode,
 }: HeaderProps) {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  // const [currentDate, setCurrentDate] = useState(new Date());
+  const { state, dispatch, handleNext, handlePrev } = useCalendarContext();
 
   const dateString = useMemo(() => {
-    return format(currentDate, "yyyy年MM月", { locale: ja });
-  }, [currentDate]);
+    return format(state.currentDate, "yyyy年MM月", { locale: ja });
+  }, [state.currentDate]);
 
   function handleClickToday(): void {
-    setCurrentDate(new Date());
+    dispatch({type: 'TODAY'});
   }
 
-  function handlePrevClick(event: React.MouseEvent<HTMLButtonElement>): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function handleNextClick(event: React.MouseEvent<HTMLButtonElement>): void {
-    throw new Error("Function not implemented.");
-  }
-
-  console.log(currentDate);
+  console.log(state.currentDate);
 
   return (
     <Flex
@@ -78,7 +72,7 @@ export function Header({
           variant={"subtle"}
           fontSize={"2xl"}
           rounded={"full"}
-          onClick={handlePrevClick}
+          onClick={handlePrev}
         >
           <FiChevronLeft />
         </IconButton>
@@ -87,7 +81,7 @@ export function Header({
           variant={"subtle"}
           fontSize={"2xl"}
           rounded={"full"}
-          onClick={handleNextClick}
+          onClick={handleNext}
         >
           <FiChevronRight />
         </IconButton>
